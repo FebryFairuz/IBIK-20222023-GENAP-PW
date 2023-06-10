@@ -24,7 +24,7 @@
             <div class="mb-3">
                 <label class="form-label">Name</label>
                 <input type="hidden" class="form-control id" name="id" />
-                <input type="text" class="form-control name" name="name" />
+                <input type="text" class="form-control name" name="name2" />
                 <div class="form-text text-danger"></div>
             </div>
             <div class="mb-3">

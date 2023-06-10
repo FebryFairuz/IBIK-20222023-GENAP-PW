@@ -38,21 +38,18 @@ class ProductsController extends Controller
             ]);
 
             $results = $products->updatedData($request->all());
-
-
-            return redirect()->route('m_products')->with('success',($results) ? 'Product saved.' : 'Product failed save.');
+            return redirect()->route('m_products')->with('success',
+                    ($results) ? 'Product saved.' : 'Product failed save.');
         }else{
             $request->validate([
                 'name' => 'required',
                 'description' => 'required',
                 'price'=> 'required'
             ]);
-
             $results = $products->storedData($request->all());
-
-            return redirect()->route('m_products')->with('success',($results)? 'Product created successfully.': 'Product failed save.');
+            return redirect()->route('m_products')->with('success',
+                    ($results)? 'Product created successfully.': 'Product failed save.');
         }
-
     }
 
     /**
