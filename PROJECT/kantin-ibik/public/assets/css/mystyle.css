@@ -1,0 +1,10 @@
+html,
+body {
+    height: 100%;
+}
+
+.nav.nav-pills.nav-pills-custom .show > .nav-link.nav-link-border-solid.active,
+.nav.nav-pills.nav-pills-custom .nav-link.nav-link-border-solid.active {
+    border: 3px solid var(--bs-primary);
+}
+
