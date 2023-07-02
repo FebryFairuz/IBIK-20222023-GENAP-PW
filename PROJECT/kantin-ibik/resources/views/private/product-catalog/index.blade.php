@@ -117,48 +117,48 @@
 </div>
 
 
-    <script>
-        const RemoveItem = (id) => {
-            if (confirm("Are you sure wants to remove this item ?")) {
-                const xmlhttp = new XMLHttpRequest();
-                xmlhttp.onload = function() {
-                    var responce = JSON.parse(this.response);
-                    alert(responce.message);
-                    window.location.href = "{{ route('catalog-product') }}";
-                }
-                xmlhttp.open("GET", "{{ url('') }}/api/product/remove/" + id);
-                xmlhttp.send();
-            }
-        }
-
-        const EditItem = (id) => {
-            var targetDiv = document.getElementById("form-product");
-            let id_ = targetDiv.getElementsByClassName("id")[0];
-            let name = targetDiv.getElementsByClassName("name")[0];
-            let desc = targetDiv.getElementsByClassName("description")[0];
-            let price = targetDiv.getElementsByClassName("price")[0];
-            let is_active_Y = targetDiv.getElementsByClassName("is_active_Y")[0];
-            let is_active_N = targetDiv.getElementsByClassName("is_active_N")[0];
-
+<script>
+    const RemoveItem = (id) => {
+        if (confirm("Are you sure wants to remove this item ?")) {
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 var responce = JSON.parse(this.response);
-                if(responce.result){
-                    id_.value = responce.data.id;
-                    name.value = responce.data.name;
-                    desc.value = responce.data.description;
-                    price.value = responce.data.price;
-                    if(responce.data.is_active === 1){
-                        is_active_Y.checked = true;
-                    }else{
-                        is_active_N.checked = true;
-                    }
-                }else{
-                    alert("No record found");
-                }
+                alert(responce.message);
+                window.location.href = "{{ route('catalog-product') }}";
             }
-            xmlhttp.open("GET", "{{ url('') }}/api/product/detail/" + id);
+            xmlhttp.open("GET", "{{ url('') }}/api/product/remove/" + id);
             xmlhttp.send();
         }
-    </script>
+    }
+
+    const EditItem = (id) => {
+        var targetDiv = document.getElementById("form-product");
+        let id_ = targetDiv.getElementsByClassName("id")[0];
+        let name = targetDiv.getElementsByClassName("name")[0];
+        let desc = targetDiv.getElementsByClassName("description")[0];
+        let price = targetDiv.getElementsByClassName("price")[0];
+        let is_active_Y = targetDiv.getElementsByClassName("is_active_Y")[0];
+        let is_active_N = targetDiv.getElementsByClassName("is_active_N")[0];
+
+        const xmlhttp = new XMLHttpRequest();
+        xmlhttp.onload = function() {
+            var responce = JSON.parse(this.response);
+            if(responce.result){
+                id_.value = responce.data.id;
+                name.value = responce.data.name;
+                desc.value = responce.data.description;
+                price.value = responce.data.price;
+                if(responce.data.is_active === 1){
+                    is_active_Y.checked = true;
+                }else{
+                    is_active_N.checked = true;
+                }
+            }else{
+                alert("No record found");
+            }
+        }
+        xmlhttp.open("GET", "{{ url('') }}/api/product/detail/" + id);
+        xmlhttp.send();
+    }
+</script>
 @endsection

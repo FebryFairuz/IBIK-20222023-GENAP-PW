@@ -45,4 +45,6 @@ Route::group(['middleware' => 'cors'], function () {
     Route::get('product/remove/{id}', [ProductsController::class, 'destroy']);
 
     Route::post('order', [OrdersController::class, 'stored']);
+    Route::get('all-invoice', [OrdersController::class, 'allinvoice']);
+    Route::get('invoice/{code}', [OrdersController::class, 'invoice']);
 });

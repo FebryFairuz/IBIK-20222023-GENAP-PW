@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Authentication;
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\Orders;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\Products;
 use Illuminate\Support\Facades\Route;
@@ -33,4 +34,4 @@ Route::controller(Products::class)->group(function () {
 });
 
 Route::get('/invoice/{token}', [PaymentsController::class,'invoice'])->middleware('auth');
-
+Route::get('/reporting', [Orders::class,'reporting'])->name('reporting')->middleware('auth');

@@ -39,7 +39,10 @@
             <h1 class="fw-bold text-gray-800 mb-5">Payment Method</h1>
             <div class="d-flex flex-equal gap-5 gap-xxl-9 px-0 mb-12" data-kt-buttons="true"
                 data-kt-buttons-target="[data-kt-button]" data-kt-initialized="1">
-                <input type="hidden" name="current_user" value="{{ auth()->user()->email }}"  />
+                @auth
+                    <input type="hidden" name="current_user" value="{{ auth()->user()->email }}"  />
+                @endauth
+
                 @foreach ( $payments as $payment)
                     <label
                         class="btn bg-light btn-color-gray-600 btn-active-text-gray-800 border border-3 border-gray-100 border-active-primary btn-active-light-primary w-100 px-4"
@@ -54,7 +57,12 @@
                 @endforeach
             </div>
 
+            @auth
             <button class="btn btn-primary fs-1 w-100 py-4 print-bill" type="button">Print Bills</button>
+            @else
+            <button class="btn btn-primary fs-1 w-100 py-4" disabled="true" type="button">Print Bills</button>
+            @endauth
+
         </div>
     </div>
 </div>

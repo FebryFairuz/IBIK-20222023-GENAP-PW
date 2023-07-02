@@ -178,7 +178,6 @@ $(document).ready(function () {
                 arrBill.product = arrOrder;
                 arrBill.loading = true;
                 arrBill.current_user = $("#card-order .my-payment input[name=current_user]").val();
-                console.log(arrBill);
                 itsme.text("Processing...").prop("disabled", true);
                 var results = PushOrder(arrBill);
                 if(results.result){
@@ -214,6 +213,33 @@ $(document).ready(function () {
             reader.readAsDataURL(file);
         }
     });
+
+    $("#table-orders").on("click",".detail-order",function(){
+        var itsme = $(this);
+        var code = itsme.data('code');
+        var settings = {
+            "url": "http://localhost:8000/api/invoice/"+code,
+            "method": "GET",
+            "timeout": 0,
+          };
+
+          $.ajax(settings).done(function (response) {
+            console.log(response);
+            if(response.result){
+                if(Object.values(response.data).length > 0){
+                    var orderindex = response.data[0];
+                    orderindex.totalBill = response.data.reduce((a, v) => (a = a + v.price), 0);
+                    orderindex.taxBill = (12 / 100) * orderindex.totalBill;
+                    ShowModalBill({header:"Detail Transaction - "+code, body:InvoiceBilling({order:orderindex,detail:response.data}) });
+                }
+
+            }
+          }).fail(function(error){
+            console.log(error);
+            ShowModalBill({header:"Error", body:error.responseText});
+          });
+        //
+    })
 
     const InvoiceBilling = (data) =>{
         let encObj = jwt_encode(data, "1b!k_pWl");

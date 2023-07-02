@@ -60,7 +60,6 @@ class Products extends Controller
                 $newFilename = time()."-".preg_replace('/\s+/', '-', $request->name).".jpg";
                 $request['images'] = $newFilename;
                 $file->move(public_path('./assets/media/uploads/products'), $newFilename);
-
             }
 
             $results = $products->storedData($request->all());

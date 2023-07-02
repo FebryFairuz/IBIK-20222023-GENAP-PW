@@ -42,8 +42,24 @@ class Orders extends Model
         return $results;
     }
 
-    public function insertOrderRel($data){
-        $results = DB::table("order_rel_product")->where($condition);
+    public function fetchInvoice($code){
+        $results = DB::table('order_rel_product AS a')
+                    ->select(array('b.code', 'a.product_id', 'c.name', 'a.quantity', 'a.price','b.created_by','b.created_at', 'b.total', 'd.name AS payment_name'))
+                    ->join('orders  AS b','b.id','=','a.order_id')
+                    ->join('products  AS c','c.id','=','a.product_id')
+                    ->join('payments  AS d','d.id','=','b.payment_id')
+                    ->where('b.code', '=',$code)
+                    ->get();
+                    //->toSql();
+        return $results;
+    }
+
+    public function fetchOrderHist(){
+        $results = DB::table($this->table.' AS a')
+                    ->select(array('a.*','b.name as payment_name',DB::raw('(select COUNT(order_id) from order_rel_product  where order_id = a.id) as TotalItem')))
+                    ->join('payments AS b','b.id','=','a.payment_id')
+                    ->orderBy('a.created_at','desc')
+                    ->get();
         return $results;
     }
 

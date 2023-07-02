@@ -19,9 +19,9 @@
             </div>
             <div class="d-flex align-items-center gap-2 gap-lg-3">
                 @auth
-                <button class="btn btn-sm fw-bold bg-body btn-color-gray-700 btn-active-color-primary">
+                <a href="{{ route('reporting') }}" class="btn btn-sm fw-bold bg-body btn-color-gray-700 btn-active-color-primary">
                     Recent Orders
-                </button>
+                </a>
                 <a class="btn btn-sm fw-bold btn-primary" href="{{ route('catalog-product') }}">New Product</a>
                 @else
                 <a href="{{ url('/signin') }}" class="btn btn-lg fw-bold btn-danger">Sign In</a>

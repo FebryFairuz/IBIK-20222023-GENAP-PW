@@ -13,4 +13,5 @@ class PaymentsController extends Controller
         $decodeTokenID = json_decode($returnToken);
         return view('private.payments.invoice')->with(['invoice'=>$decodeTokenID, "token"=>$token]);
     }
+
 }
